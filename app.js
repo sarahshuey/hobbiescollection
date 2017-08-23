@@ -12,18 +12,11 @@ mongoose.Promise = require('bluebird');
 // Replace "test" with your database name.
 mongoose.connect('mongodb://localhost:27017/hobbies');
 
-const hobbie = new Sport({hobbieName: "Volleyball"});
+const hobbie = new Sport({hobbieName: "Football"});
 hobbie.save()
-  .then(function () {
-    console.log('saved ' + hobbieName);
-    return Sport.findOne({hobbieName: "Volleyball"});
-  }).then(function(results) {
-    console.log('\nfindOne returned\n' + results);
-    return Sport.find({hobbieName:"Soccer"})
-  }).then(function (results) {
-    console.log('\n\nfind returned ' + results.length + ' results');
-  }).catch(function (error) {
-    console.log('error ' + JSON.stringify(error));
+  .then(function (results) {
+    console.log('saved ' + results);
+    return Sport.findOne({hobbieName: "Football"});
   })
 
 console.log(hobbie);
@@ -35,3 +28,11 @@ process.on('SIGINT', function() {
     process.exit(0);
   });
   });
+  // .then(function(results) {
+  //   console.log('\nfindOne returned\n' + results);
+  //   return Sport.find({hobbieName:"Soccer"})
+  // }).then(function (results) {
+  //   console.log('\n\nfind returned ' + results.length + ' results');
+  // }).catch(function (error) {
+  //   console.log('error ' + JSON.stringify(error));
+  // })

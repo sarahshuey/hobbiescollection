@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const sportsSchema = new mongoose.Schema({
-    hobbieName: { type: String, required: true, unique: true },
+    // TODO change name to be unique
+    hobbieName: { type: String, required: true},
     description: {type: String},
     source: [{
       years: Number,
