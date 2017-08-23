@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const sportsSchema = new mongoose.Schema({
     // TODO change name to be unique
-    hobbieName: { type: String, required: true},
-    description: {type: String},
+    hobbieName: { type: String, required: true, unique: true},
+    description: [String],
     source: [{
       years: Number,
       equipment:{type: String}
@@ -11,6 +11,6 @@ const sportsSchema = new mongoose.Schema({
     players: Number
 })
 
-const Sport = mongoose.model('Sport', sportsSchema);
+const sport = mongoose.model('Sport', sportsSchema);
 
-module.exports = Sport;
+module.exports = sport;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sports</title>
+  </head>
+  <body>
+    <form class="form" action="/" method="post">
+      <input type="text"
+     name="hobbieName"
+   placeholder="Sport">
+      <input type="text" name="description" placeholder="description">
+      <input type="number" name="years" placeholder="years played">
+      <input type="text" name="equipment" placeholder="Equipment Used">
+      <input type="number" name="players" placeholder="Number of Players">
+      <button type="submit" name="button">Submit</button>
+    </form>
+  <ul>
+    {{#sport}}
+    <li>{{hobbieName}}</li>
+    {{/sport}}
+  </ul>
+  </body>
+</html>
