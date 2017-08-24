@@ -17,7 +17,11 @@
     </form>
   <ul>
     {{#sport}}
-    <li>{{hobbieName}}</li>
+    <li>
+      <form class="deleteme" action="/delete/{{_id}}" method="post">
+      <button type="submit" name="deletebutton">Delete</button>
+    </form>
+      {{hobbieName}}</li>
     {{/sport}}
   </ul>
   </body>

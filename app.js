@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 let url = 'mongodb://localhost:27017/hobbies';
 mongoose.connect(url);
+const ObjectId = require('mongodb').ObjectID;
 app.engine('mustache', mustacheExpress());
 app.set('views', './views')
 app.set('view engine', 'mustache')
@@ -23,31 +24,45 @@ app.get('/', function(req, res) {
         sport: sports
       })
     })
-    .catch(function (error) {
-    console.log('error ' + JSON.stringify(error));
-  })
+    .catch(function(error) {
+      console.log('error ' + JSON.stringify(error));
+    })
 });
 
-app.post('/hobbies',function(req,res) {
-let hobbieName = req.body.hobbieName
-const hobby = new Sport({
-  hobbieName: hobbieName,
+app.post('/hobbies', function(req, res) {
+  let hobbieName = req.body.hobbieName
+  const hobby = new Sport({
+    hobbieName: hobbieName,
+  });
+
+  hobby.save().then(function(results) {
+      console.log("saved " + results);
+      return Sport.find()
+    })
+    .then(function(hobbie) {
+      console.log(hobbie);
+      res.render('sports', {
+        sport: hobbie
+      })
+    })
+    .catch(function(error, hobbie) {
+      console.log('error ' + JSON.stringify(error));
+      res.redirect('/')
+    })
 });
 
-hobby.save().then(function(results) {
-  console.log("saved " + results);
-  return Sport.find()
-})
-.then(function(hobbie) {
-console.log(hobbie);
-res.render('sports',{
-  sport:hobbie
-})
-// .catch(function(error,hobbie) {
-// console.log('error ' + JSON.stringify(error));
-// res.redirect('/')
-// })
-})
+app.post('/delete/:id', function(req, res) {
+  let id = req.params.id;
+  Sport.deleteOne({
+      _id: new ObjectId(id)
+    })
+    .then(function() {
+      res.redirect('/')
+    })
+    .catch(function(error, hobbie) {
+      console.log('error ' + JSON.stringify(error));
+      res.redirect('/')
+    })
 });
 
 app.listen(3000, function() {
