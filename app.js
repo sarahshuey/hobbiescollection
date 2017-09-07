@@ -1,3 +1,4 @@
+//boiler plate
 const express = require('express')
 const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 
+
+//get for the home page
 app.get('/', function(req, res) {
   console.log('root path hit');
   Sport.find()
@@ -29,10 +32,12 @@ app.get('/', function(req, res) {
     })
 });
 
+
+//adding a new "hobbie" to the list
 app.post('/hobbies', function(req, res) {
   let hobbieName = req.body.hobbieName
   const hobby = new Sport({
-    hobbieName: hobbieName,
+    hobbieName: hobbieName
   });
 
   hobby.save().then(function(results) {
@@ -51,6 +56,8 @@ app.post('/hobbies', function(req, res) {
     })
 });
 
+
+//allows me to delete a hobbie on the list
 app.post('/delete/:id', function(req, res) {
   let id = req.params.id;
   Sport.deleteOne({
@@ -65,6 +72,8 @@ app.post('/delete/:id', function(req, res) {
     })
 });
 
+
+// where we are listening for js
 app.listen(3000, function() {
   console.log('Successfully started express appslication!');
 });

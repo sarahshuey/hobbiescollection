@@ -10,9 +10,6 @@
      name="hobbieName"
    placeholder="Sport">
       <input type="text" name="description" placeholder="description">
-      <input type="number" name="years" placeholder="years played">
-      <input type="text" name="equipment" placeholder="Equipment Used">
-      <input type="number" name="players" placeholder="Number of Players">
       <input type="submit" name="button" placeholder="Submit">
     </form>
   <ul>
@@ -20,8 +17,7 @@
     <li>
       <form class="deleteme" action="/delete/{{_id}}" method="post">
       <button type="submit" name="deletebutton">Delete</button>
-    </form>
-      {{hobbieName}}</li>
+    </form> {{hobbieName}}</li>
     {{/sport}}
   </ul>
   </body>
